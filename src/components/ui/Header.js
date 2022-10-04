@@ -6,6 +6,8 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/styles';
+
 const ElevationScroll = (props) => {
   const { children } = props;
   const trigger = useScrollTrigger({
@@ -18,15 +20,25 @@ const ElevationScroll = (props) => {
   });
 };
 
+const useStyles = makeStyles((theme) => ({
+  toolbarMargin: {
+    ...theme.mixins.toolbar,
+  },
+}));
+
 const Header = (props) => {
+  const classes = useStyles();
   return (
-    <ElevationScroll>
-      <AppBar position='fixed'>
-        <Toolbar>
-          <Typography variant='h3'>Arc Development</Typography>
-        </Toolbar>
-      </AppBar>
-    </ElevationScroll>
+    <>
+      <ElevationScroll>
+        <AppBar position='fixed'>
+          <Toolbar>
+            <Typography variant='h3'>Arc Development</Typography>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <div className={classes.toolbarMargin} />
+    </>
   );
 };
 
