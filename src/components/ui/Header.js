@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
-  const [value, setValue] = useState(window.location.pathname);
+  const [value, setValue] = useState('/');
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -90,6 +90,29 @@ const Header = (props) => {
     setAnchorEl(null);
     setOpen(false);
   };
+
+  useEffect(() => {
+    switch (window.location.pathname) {
+      case '/services':
+        setValue('/services');
+        setSelectedIndex(0);
+        break;
+      case '/customsoftware':
+        setValue('/services');
+        setSelectedIndex(1);
+        break;
+      case '/mobileapps':
+        setValue('/services');
+        setSelectedIndex(2);
+        break;
+      case '/websites':
+        setValue('/services');
+        setSelectedIndex(3);
+        break;
+      default:
+        setValue(window.location.pathname);
+    }
+  }, [value]);
 
   const menuOptions = [
     { name: 'Services', link: '/services' },
