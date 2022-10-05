@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(window.location.pathname);
 
   const handleChange = (e, value) => {
     setValue(value);
@@ -75,30 +75,35 @@ const Header = (props) => {
                 className={classes.tab}
                 component={Link}
                 to='/'
+                value='/'
               />
               <Tab
                 label='Services'
                 className={classes.tab}
                 component={Link}
                 to='/services'
+                value='/services'
               />
               <Tab
                 label='The Revolution'
                 className={classes.tab}
                 component={Link}
                 to='/revolution'
+                value='/revolution'
               />
               <Tab
                 label='About Us'
                 className={classes.tab}
                 component={Link}
                 to='/about'
+                value='/about'
               />
               <Tab
                 label='Contact Us'
                 className={classes.tab}
                 component={Link}
                 to='/contact'
+                value='/contact'
               />
             </Tabs>
             <Button
