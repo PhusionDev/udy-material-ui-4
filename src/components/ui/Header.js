@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import {
   AppBar,
   Toolbar,
@@ -68,11 +70,36 @@ const Header = (props) => {
               onChange={handleChange}
               indicatorColor='primary'
             >
-              <Tab className={classes.tab} label='Home' />
-              <Tab className={classes.tab} label='Services' />
-              <Tab className={classes.tab} label='The Revolution' />
-              <Tab className={classes.tab} label='About Us' />
-              <Tab className={classes.tab} label='Contact Us' />
+              <Tab
+                label='Home'
+                className={classes.tab}
+                component={Link}
+                to='/'
+              />
+              <Tab
+                label='Services'
+                className={classes.tab}
+                component={Link}
+                to='/services'
+              />
+              <Tab
+                label='The Revolution'
+                className={classes.tab}
+                component={Link}
+                to='/revolution'
+              />
+              <Tab
+                label='About Us'
+                className={classes.tab}
+                component={Link}
+                to='/about'
+              />
+              <Tab
+                label='Contact Us'
+                className={classes.tab}
+                component={Link}
+                to='/contact'
+              />
             </Tabs>
             <Button
               variant='contained'
