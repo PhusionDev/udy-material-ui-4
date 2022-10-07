@@ -113,7 +113,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.orange,
   },
   drawerItemSelected: {
-    opacity: 1,
+    '& .MuiListItemText-root': {
+      opacity: 1,
+    },
+  },
+  appbar: {
+    zIndex: theme.zIndex.modal + 1,
   },
 }));
 
@@ -245,10 +250,12 @@ const Header = (props) => {
         MenuListProps={{ onMouseLeave: handleClose }}
         classes={{ paper: classes.menu }}
         elevation={0}
+        style={{ zIndex: 1302 }}
+        keepMounted
       >
         {menuOptions.map((option, i) => (
           <MenuItem
-            key={option}
+            key={`${option}${i}`}
             component={Link}
             to={option.link}
             classes={{ root: classes.menuItem }}
@@ -276,6 +283,7 @@ const Header = (props) => {
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
       >
+        <div className={classes.toolbarMargin} />
         <List disablePadding>
           <ListItem
             onClick={() => {
@@ -287,15 +295,9 @@ const Header = (props) => {
             component={Link}
             to='/'
             selected={value === '/'}
+            classes={{ selected: classes.drawerItemSelected }}
           >
-            <ListItemText
-              className={
-                value === '/'
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
+            <ListItemText className={classes.drawerItem} disableTypography>
               Home
             </ListItemText>
           </ListItem>
@@ -309,15 +311,9 @@ const Header = (props) => {
             component={Link}
             to='/services'
             selected={value === '/services'}
+            classes={{ selected: classes.drawerItemSelected }}
           >
-            <ListItemText
-              className={
-                value === '/services'
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
+            <ListItemText className={classes.drawerItem} disableTypography>
               Services
             </ListItemText>
           </ListItem>
@@ -331,15 +327,9 @@ const Header = (props) => {
             component={Link}
             to='/revolution'
             selected={value === '/revolution'}
+            classes={{ selected: classes.drawerItemSelected }}
           >
-            <ListItemText
-              className={
-                value === '/revolution'
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
+            <ListItemText className={classes.drawerItem} disableTypography>
               The Revolution
             </ListItemText>
           </ListItem>
@@ -353,15 +343,9 @@ const Header = (props) => {
             component={Link}
             to='/about'
             selected={value === '/about'}
+            classes={{ selected: classes.drawerItemSelected }}
           >
-            <ListItemText
-              className={
-                value === '/about'
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
+            <ListItemText className={classes.drawerItem} disableTypography>
               About Us
             </ListItemText>
           </ListItem>
@@ -375,20 +359,13 @@ const Header = (props) => {
             component={Link}
             to='/contact'
             selected={value === '/contact'}
+            classes={{ selected: classes.drawerItemSelected }}
           >
-            <ListItemText
-              className={
-                value === '/contact'
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
+            <ListItemText className={classes.drawerItem} disableTypography>
               Contact Us
             </ListItemText>
           </ListItem>
           <ListItem
-            className={classes.drawerItemEstimate}
             onClick={() => {
               setOpenDrawer(false);
               setValue('/estimate');
@@ -398,15 +375,12 @@ const Header = (props) => {
             component={Link}
             to='/estimate'
             selected={value === '/estimate'}
+            classes={{
+              root: classes.drawerItemEstimate,
+              selected: classes.drawerItemSelected,
+            }}
           >
-            <ListItemText
-              className={
-                value === '/estimate'
-                  ? [classes.drawerItem, classes.drawerItemSelected]
-                  : classes.drawerItem
-              }
-              disableTypography
-            >
+            <ListItemText className={classes.drawerItem} disableTypography>
               Free Estimate
             </ListItemText>
           </ListItem>
@@ -425,7 +399,7 @@ const Header = (props) => {
   return (
     <>
       <ElevationScroll>
-        <AppBar position='fixed'>
+        <AppBar position='fixed' className={classes.appbar}>
           <Toolbar disableGutters>
             <Button
               component={Link}
